@@ -1,0 +1,151 @@
+// set primary and secondary color
+$prim-color: #ff6453;
+$sec-color: #4188de;
+#pong-game {
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: $sec-color;
+  transition: all 0.3s ease-in-out;
+  transition-property: width, height, left, top;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.active {
+    top: -100%;
+    left: -100%;
+
+    > i {
+      color: white;
+
+      &:hover {
+        color: #aaa;
+      }
+    }
+  }
+
+  #start-pong {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: clamp(5px, 0.6vw, 20px) clamp(15px, 1.8vw, 60px);
+    font: 1.7rem/1.5 sans-serif;
+    font-size: clamp(1rem, 1.8vw, 4rem);
+    background: transparent;
+    border: 1px solid #ccc;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    z-index: 10;
+    border-radius: clamp(2px, 0.3vw, 10px);
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      background: white;
+      color: black;
+    }
+  }
+
+  #boards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    inset: 0;
+    display: none;
+    --height: 150px;
+    --width: 30px;
+
+    .user,
+    .computer {
+      width: 100%;
+      height: 100%;
+      border: clamp(3px, 0.3vw, 10px) dashed white;
+    }
+
+    #user-board,
+    #computer-board {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: var(--width);
+      height: var(--height);
+      background: white;
+      border-radius: calc(var(--width) / 2);
+      box-shadow: 0 0 8px 2px rgba(0, 0, 0, 0.5);
+      border: 1px solid grey;
+      transform: translate(0, -50%);
+    }
+
+    #computer-board {
+      left: 100%;
+      background-color: black;
+      box-shadow: 0 0 8px 2px rgba(255, 255, 255, 0.5);
+      transform: translate(calc(-1 * var(--width)), -50%);
+      transition: top 1s ease-in-out;
+      top: 50%;
+    }
+  }
+
+  #score {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: clamp(0.6rem, 1.2vw, 2.4rem);
+    font-family: sans-serif;
+    color: white;
+    z-index: 2;
+    border: clamp(1px, 0.17vw, 4px) solid white;
+    background-color: $sec-color;
+    padding: clamp(0.5rem, 1.2vw, 2.5rem);
+    transition: all 0.5s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+    gap: clamp(0.5rem, 1.2vw, 2.5rem);
+
+    > *:nth-child(2) {
+      text-align: center;
+      font-size: clamp(1rem, 2vw, 4rem);
+    }
+
+    &.game-over {
+      top: 50%;
+      transform: translate(-50%, -50%);
+      padding: clamp(3rem, 6vw, 10rem);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      font-size: clamp(1rem, 1.7vw, 4rem);
+
+      .play-again-pong {
+        display: block;
+      }
+    }
+
+    .play-again-pong {
+      display: none;
+      padding: clamp(5px, 0.6vw, 20px) clamp(15px, 1.8vw, 60px);
+      font: 20px/1.5 sans-serif;
+      font-size: clamp(0.8rem, 1.5vw, 3rem);
+      background: $sec-color;
+      color: white;
+      border: 2px solid #ccc;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+      z-index: 10;
+      border-radius: 5px;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        background: white;
+        color: black;
+      }
+    }
+  }
+}

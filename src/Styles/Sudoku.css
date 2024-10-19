@@ -1,0 +1,223 @@
+#sudoku-container {
+  background-color: #4188de;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+  transition-property: width, height, left, top;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+#sudoku-container .difficulty {
+  font-family: sans-serif;
+  text-align: center;
+  font-size: clamp(0.8rem, 1.6vw, 3.2rem);
+  animation: appear-sudoku 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out;
+  color: #ff6453;
+  text-shadow: 0 0 8px black;
+}
+#sudoku-container .difficulty button {
+  font-size: clamp(0.8rem, 1.6vw, 3.2rem);
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: clamp(0.4rem, 0.7vw, 1.2rem) clamp(0.8rem, 1.2vw, 2.4rem);
+  cursor: pointer;
+  margin: clamp(0.5rem, 1.8vw, 4rem);
+  border-radius: 5px;
+  box-shadow: 0 0 6px black;
+  transition: all 0.2s ease-in-out;
+}
+#sudoku-container .difficulty button:active {
+  box-shadow: 0 0 0 0;
+}
+#sudoku-container .difficulty button:hover {
+  background-color: #ff6453;
+  transform: scale(1.1);
+}
+#sudoku-container .difficulty button:nth-of-type(2):hover {
+  background-color: orange;
+}
+#sudoku-container .difficulty button:nth-of-type(1):hover {
+  background-color: rgb(73, 180, 73);
+}
+@keyframes appear-sudoku {
+  from {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#sudoku-container #sudoku {
+  display: none;
+  transform: scale(0);
+}
+#sudoku-container #sudoku.active {
+  display: block;
+  animation: appear-sudoku 0.5s ease-in-out forwards;
+  transition: transform 0.5s ease-in-out;
+}
+#sudoku-container #sudoku > h1 {
+  font-family: sans-serif;
+  font-size: clamp(2rem, 2.5vw, 4.8rem);
+  margin-bottom: clamp(5px, 0.8rem, 10px);
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: 0 0 16px black;
+}
+#sudoku-container #sudoku > h1.Easy {
+  color: lightgreen;
+}
+#sudoku-container #sudoku > h1.Medium {
+  color: orange;
+}
+#sudoku-container #sudoku > h1.Hard {
+  color: red;
+}
+#sudoku-container #sudoku .row {
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#sudoku-container #sudoku .row:nth-of-type(1) {
+  border-top: 3px solid black;
+}
+#sudoku-container #sudoku .row:nth-of-type(1) .box span {
+  left: 0;
+  top: calc((100% + 4px) * -1);
+}
+#sudoku-container #sudoku .row:nth-of-type(3n) {
+  border-bottom: 3px solid black;
+}
+#sudoku-container #sudoku .row .box {
+  --size: 70px;
+  width: var(--size);
+  height: var(--size);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: calc(var(--size) / 1.8);
+  cursor: pointer;
+  font-weight: bold;
+  font-family: sans-serif;
+  background-color: transparent;
+  position: relative;
+}
+#sudoku-container #sudoku .row .box:nth-child(1) span {
+  left: calc((100% + 4px) * -1);
+}
+#sudoku-container #sudoku .row .box:nth-child(3n) {
+  border-right: 3px solid black;
+}
+#sudoku-container #sudoku .row .box span {
+  position: absolute;
+  top: 0;
+  left: calc(100% + 4px);
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  font-family: "Font Awesome 5 Free", sans-serif;
+  font-weight: 900;
+  font-size: calc(var(--size) / 2.2);
+  justify-content: center;
+  align-items: center;
+  display: none;
+  content: "\f303";
+  background-color: #fff;
+  color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+#sudoku-container #sudoku .row .box span:hover {
+  background-color: #dddddd;
+}
+#sudoku-container #sudoku .row .box.selected {
+  border: 4px solid #ff6453;
+}
+#sudoku-container #sudoku .row .box.selected span {
+  display: flex;
+}
+#sudoku-container #sudoku .row .box.new {
+  background-color: transparent;
+  color: #ff6453;
+}
+#sudoku-container #sudoku .row .box.pencil {
+  font-size: calc(var(--size) / 5);
+  color: rgba(0, 0, 0, 0.5);
+  letter-spacing: 10px;
+  word-break: break-all;
+}
+#sudoku-container #sudoku .row .box.pencil span {
+  background-color: blue;
+  letter-spacing: 0;
+  color: #33ff33;
+}
+#sudoku-container #sudoku.error .row {
+  border: 5px solid red;
+}
+@keyframes appear-sudoku {
+  from {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#sudoku-container .timer {
+  font-family: sans-serif;
+  font-size: clamp(0.7rem, 1.4vw, 2.8rem);
+  position: absolute;
+  left: clamp(10px, 1.2vw, 30px);
+  top: clamp(10px, 1.2vw, 30px);
+  display: none;
+  z-index: 1;
+  color: #ff6453;
+  text-shadow: 0 0 16px black;
+}
+#sudoku-container .result {
+  display: none;
+  font-size: 30px;
+  text-align: center;
+}
+#sudoku-container .result h1 {
+  margin-bottom: 20px;
+  text-align: center;
+}
+#sudoku-container .result h1 span {
+  display: inline-block;
+  animation: dance 0.5s linear infinite;
+}
+@keyframes dance {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+#sudoku-container .result.active {
+  display: block;
+  animation: appear-sudoku 0.5s ease-in-out;
+}
+@keyframes appear-sudoku {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 768px) {
+  #sudoku-container .result {
+    font-size: clamp(0.4rem, 3.5vw, 1.5rem);
+  }
+}/*# sourceMappingURL=Sudoku.css.map */
